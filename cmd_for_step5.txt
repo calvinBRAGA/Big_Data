@@ -1,0 +1,35 @@
+## The list of commands to launch to retrieve the predict.csv treated by the machine learning algorithm and put in a S3 bucket.
+##Uses s3cmd (apt-get update s3cmd)
+
+#First time configuration : 
+
+#S3 configuration
+s3cmd --configure
+Acces key : AKIAJHJEIGQMB4YFS2DQ
+Secret key : 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
+Default region : eu-west-3
+Encryption password : 
+Path to PGP program :
+Use HTTPS protocol : No
+no proxy
+
+#mongod configuration : 
+mongod --dbpath ./data --smallfiles
+
+
+
+
+
+
+#The script itself:
+
+s3cmd get s3://fraud-data-predict-952a6z26az5-zef6erg51r6th1t/outtest.csv
+
+# We have a header line so we use this:
+mongoimport -d predictdb -c predictions --type csv --file out.csv --headerline 
+
+
+# Connect to the db and list frauds : 
+mongo
+use predictdb
+db.predictions.find({isFraud:1}).pretty()
