@@ -5,8 +5,8 @@
 We use s3cmd (based on goto3) and mongoimport that come with the default mongoDB install.
 
 
-##First time configuration : 
-###s3cmd download and configure:
+## First time configuration : 
+### s3cmd download and configure:
 ```BASH
 apt-get update s3cmd
 #S3 configuration
@@ -19,15 +19,15 @@ Path to PGP program :
 Use HTTPS protocol : No
 no proxy
 ```
-##Launch mongod  : 
+## Launch mongod  : 
 ```
 mongod --dbpath ./data --smallfiles
 ```
 
 
-##The script itself:
+## The script itself:
 
-###Download the csv from the S3 bucket
+### Download the csv from the S3 bucket
 ```
 s3cmd get s3://fraud-data-predict/out.csv
 ```
